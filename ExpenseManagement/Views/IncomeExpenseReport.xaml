@@ -1,0 +1,38 @@
+﻿<UserControl  x:Class="ViewSwitchingNavigation.ExpenseManagement.Views.IncomeExpenseReport"
+              xmlns:controls="clr-namespace:ViewSwitchingNavigation.Controls;assembly=ViewSwitchingNavigation.Controls" 
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d"
+    xmlns:rv="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="570"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+            </Grid.Background>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="From Date" VerticalAlignment="Center" Margin="15,5,5,5"/>
+            <DatePicker Grid.Row="0" Grid.Column="1" Width="155" BorderThickness="0" SelectedDate="{x:Static sys:DateTime.Now}"  x:Name="dtPickerFrmDt" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="To Date" VerticalAlignment="Center" Margin="15,5,5,5"/>
+            <DatePicker Grid.Row="0" Grid.Column="3" Width="155"  BorderThickness="0" SelectedDate="{x:Static sys:DateTime.Now}" x:Name="dtPickerToDt" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <Button Grid.Row="0" Grid.Column="4" Content="Show Report" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click" />
+            <WindowsFormsHost Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Margin="2,5,5,5">
+                <rv:ReportViewer x:Name="reportViewer"/>
+            </WindowsFormsHost>
+        </Grid>
+    </Grid>
+</UserControl>

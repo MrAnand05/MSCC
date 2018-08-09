@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewSwitchingNavigation", "ViewSwitchingNavigation\ViewSwitchingNavigation.csproj", "{4F877CE6-D317-4858-903E-E3B0893FCE67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewSwitchingNavigation.Controls", "ViewSwitchingNavigation.Controls\ViewSwitchingNavigation.Controls.csproj", "{C8950BAF-06A5-4AF3-964A-55B18B0E0B9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewSwitchingNavigation.Infrastructure", "ViewSwitchingNavigation.Infrastructure\ViewSwitchingNavigation.Infrastructure.csproj", "{55AA526E-1A89-4A8E-B648-8DE5DE2FD1E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewSwitchingNavigation.Email", "ViewSwitchingNavigation.Email\ViewSwitchingNavigation.Email.csproj", "{998E10B8-C8C0-4D16-BDD5-124CB1EA6CD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7F24805D-505F-4EFA-85AD-0B7289A6949A}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewSwitchingNavigation.Configuration", "ViewSwitchingNavigation.Configuration\ViewSwitchingNavigation.Configuration.csproj", "{15A4A358-2EB7-4957-9EF6-AFF2145E9D0E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{55AA526E-1A89-4A8E-B648-8DE5DE2FD1E5} = {55AA526E-1A89-4A8E-B648-8DE5DE2FD1E5}
+		{C8950BAF-06A5-4AF3-964A-55B18B0E0B9F} = {C8950BAF-06A5-4AF3-964A-55B18B0E0B9F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewSwitchingNavigation.Reports", "ViewSwitchingNavigation.Reports\ViewSwitchingNavigation.Reports.csproj", "{A1D09B18-BF7F-48B2-8633-3D3E537ED7AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewSwitchingNavigation.ExpenseManagement", "ExpenseManagement\ViewSwitchingNavigation.ExpenseManagement.csproj", "{E100FD2B-5598-4576-938E-B9B5BFDE88D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewSwitchingNavigation.Exam", "ViewSwitchingNavigation.Exam\ViewSwitchingNavigation.Exam.csproj", "{E17E2206-23AD-435F-97E1-AC4CE42E6E29}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MSCPSetUpVS2017", "MSCPSetUpVS2017\MSCPSetUpVS2017.vdproj", "{1E6F40F6-D0AF-49B9-A527-86E10696C303}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F877CE6-D317-4858-903E-E3B0893FCE67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F877CE6-D317-4858-903E-E3B0893FCE67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F877CE6-D317-4858-903E-E3B0893FCE67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F877CE6-D317-4858-903E-E3B0893FCE67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8950BAF-06A5-4AF3-964A-55B18B0E0B9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8950BAF-06A5-4AF3-964A-55B18B0E0B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8950BAF-06A5-4AF3-964A-55B18B0E0B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8950BAF-06A5-4AF3-964A-55B18B0E0B9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55AA526E-1A89-4A8E-B648-8DE5DE2FD1E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55AA526E-1A89-4A8E-B648-8DE5DE2FD1E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55AA526E-1A89-4A8E-B648-8DE5DE2FD1E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55AA526E-1A89-4A8E-B648-8DE5DE2FD1E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{998E10B8-C8C0-4D16-BDD5-124CB1EA6CD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{998E10B8-C8C0-4D16-BDD5-124CB1EA6CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{998E10B8-C8C0-4D16-BDD5-124CB1EA6CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{998E10B8-C8C0-4D16-BDD5-124CB1EA6CD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15A4A358-2EB7-4957-9EF6-AFF2145E9D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15A4A358-2EB7-4957-9EF6-AFF2145E9D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15A4A358-2EB7-4957-9EF6-AFF2145E9D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15A4A358-2EB7-4957-9EF6-AFF2145E9D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1D09B18-BF7F-48B2-8633-3D3E537ED7AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1D09B18-BF7F-48B2-8633-3D3E537ED7AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1D09B18-BF7F-48B2-8633-3D3E537ED7AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1D09B18-BF7F-48B2-8633-3D3E537ED7AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E100FD2B-5598-4576-938E-B9B5BFDE88D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E100FD2B-5598-4576-938E-B9B5BFDE88D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E100FD2B-5598-4576-938E-B9B5BFDE88D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E100FD2B-5598-4576-938E-B9B5BFDE88D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E17E2206-23AD-435F-97E1-AC4CE42E6E29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E17E2206-23AD-435F-97E1-AC4CE42E6E29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E17E2206-23AD-435F-97E1-AC4CE42E6E29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E17E2206-23AD-435F-97E1-AC4CE42E6E29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E6F40F6-D0AF-49B9-A527-86E10696C303}.Debug|Any CPU.ActiveCfg = Debug
+		{1E6F40F6-D0AF-49B9-A527-86E10696C303}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3CBF411E-F9F5-402D-85A0-C695B80AA446}
+	EndGlobalSection
+EndGlobal

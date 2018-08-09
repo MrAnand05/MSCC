@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="ViewSwitchingNavigation.Exam.Views.ExamView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:ViewSwitchingNavigation.Exam.Views"
+             mc:Ignorable="d" 
+             >
+    <Grid>
+        <TabControl 
+            AutomationProperties.AutomationId="ExamTabControl"
+            Width="auto"
+            Height="Auto">
+            <TabControl.Background>
+                <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+            </TabControl.Background>
+            <TabItem Header="Marks Entry">
+                <views:MarksDetailsView/>
+            </TabItem>
+            <TabItem Header="Report Card">
+                <views:ReportCard/>
+            </TabItem>
+            <TabItem Header="Marks Report">
+                <views:MarksView/>
+            </TabItem>
+            
+        </TabControl>
+    </Grid>
+</UserControl>

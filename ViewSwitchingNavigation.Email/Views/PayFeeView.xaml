@@ -1,0 +1,416 @@
+﻿<UserControl x:Class="ViewSwitchingNavigation.Email.Views.PayFeeView"
+             x:Name="userControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:infrastructure="clr-namespace:ViewSwitchingNavigation.Infrastructure;assembly=ViewSwitchingNavigation.Infrastructure" 
+    xmlns:infConverters="clr-namespace:ViewSwitchingNavigation.Infrastructure.Converters;assembly=ViewSwitchingNavigation.Infrastructure"
+    xmlns:controls="clr-namespace:ViewSwitchingNavigation.Controls;assembly=ViewSwitchingNavigation.Controls" 
+    xmlns:prism="http://www.codeplex.com/prism"
+    xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    mc:Ignorable="d" 
+    xmlns:vm="clr-namespace:ViewSwitchingNavigation.Email.ViewModels"
+    xmlns:views="clr-namespace:ViewSwitchingNavigation.Email.Views">
+    <UserControl.DataContext>
+        <vm:PayFeeViewModel />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <infrastructure:BindingProxy x:Key="proxy" Data="{Binding}" />
+        <infConverters:boolNotConverter x:Key="BoolNotConverter" />
+        <infConverters:ObjectBindingConverter x:Key="ObjectBindingConverter" />
+        <Style TargetType="{x:Type TextBlock}" x:Key="GridBlockStyle">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Visibility" Value="Visible"/>
+        </Style>
+
+        <Style TargetType="{x:Type FrameworkElement}" x:Key="GridEditStyle">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Visibility" Value="Hidden"/>
+        </Style>
+    </UserControl.Resources>
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding SearchStudentRequest, Mode=OneWay}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowContent>
+                    <views:SearchStudentView/>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="30"/>
+            <!--<RowDefinition Height="auto"/>-->
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+        </Grid.Background>
+        <StackPanel Grid.Row="0">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="130"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </Grid.Background>
+                <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" Grid.RowSpan="3" Source="{Binding Path=PayFeeModelObject.Image, Mode=TwoWay}" Name="imgData" Stretch="Uniform" />
+                <Button Grid.Row="0" Grid.Column="5" Content="Search" Command="{Binding RaiseSearchStudentCommand}" CommandParameter="SearchPayFee"  Padding="0,5,5,5" Margin="5,5,5,5">
+
+                </Button>
+                <Button Grid.Row="0" Grid.Column="6" Content="Submit Fee" IsEnabled="{Binding Path=PayFeeModelObject.Checkboxtesting}" Command="{Binding Path= SavePaymentCommand}" Padding="0,5,5,5" Margin="5,5,5,5">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource ObjectBindingConverter}">
+                            <Binding Path="PayFeeDetails" />
+                            <Binding Path="PayMonthlyFeeDetails" />
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+                <!--<Button Grid.Row="0" Grid.Column="6" Content="Edit" Padding="0,5,5,5" Margin="5,5,5,5"/>
+                <Button Grid.Row="0" Grid.Column="7" Content="Print Slip" Padding="0,5,5,5" Margin="5,5,5,5"/>-->
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="Name:" HorizontalAlignment="Left" />
+                <TextBlock Grid.Row="1" Grid.Column="2" TextDecorations="Underline" FontWeight="Bold" Text="{Binding Path=PayFeeModelObject.Name, Mode=TwoWay}" IsEnabled="False" HorizontalAlignment="Stretch"/>
+                <TextBlock Grid.Row="1" Grid.Column="3" Text="Father's Name:" />
+                <TextBlock Grid.Row="1" Grid.Column="3" TextDecorations="Underline" FontWeight="Bold" Text="{Binding Path=PayFeeModelObject.FatherName}" x:Name="txtFName" IsEnabled="False" Grid.ColumnSpan="2" Margin="83,0,0,0" />
+                <TextBlock Grid.Row="1" Grid.Column="5" Text="Class/Section" HorizontalAlignment="Left" />
+                <TextBlock Grid.Row="1" Grid.Column="6" TextDecorations="Underline" FontWeight="Bold" IsEnabled="False" HorizontalAlignment="Stretch" >
+                    <TextBlock.Text>
+                        <!--<MultiBinding StringFormat="{}{0}">-->
+                        <MultiBinding StringFormat="{}{0}{1}">
+                            <Binding Path="PayFeeModelObject.CurrentClass" />
+                            <Binding Path="PayFeeModelObject.Section" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="Address:" />
+                <TextBlock Grid.Row="2" Grid.Column="2" TextWrapping="Wrap" TextDecorations="Underline" FontWeight="Bold" Text="{Binding Path=PayFeeModelObject.Address}" IsEnabled="False" />
+                <TextBlock Grid.Row="2" Grid.Column="3" Text="Admin No:" />
+                <TextBlock Grid.Row="2" Grid.Column="3" TextDecorations="Underline" FontWeight="Bold" Text="{Binding Path=PayFeeModelObject.AdminNo}" IsEnabled="False" Grid.ColumnSpan="2" Margin="83,0,0,0" />
+                <TextBlock Grid.Row="2" Grid.Column="5" Text="Financial Year:" HorizontalAlignment="Left" />
+                <TextBlock Grid.Row="2" Grid.Column="6" TextDecorations="Underline" FontWeight="Bold" Text="{Binding Path=EditedFinancialYear}" IsEnabled="False" HorizontalAlignment="Stretch" />
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <StackPanel.Resources>
+                <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            </StackPanel.Resources>
+            <ListView BorderThickness=".1" Width="Auto" SelectionMode="Single" HorizontalContentAlignment="Left"
+                  ItemsSource="{Binding Path=PayFeeDetails}" AlternationCount="2"  HorizontalAlignment="Left"
+                  IsSynchronizedWithCurrentItem="True" AutomationProperties.AutomationId="PositionSummaryGrid" VerticalAlignment="Top">
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Description}"
+                      Value="Admission">
+                                <Setter Property="Background"
+                  Value="Red" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.Resources>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Height" Value="22" />
+                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="BorderThickness" Value="0,.2,0,.2" />
+                        <Setter Property="BorderBrush" Value="Black" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Balance}" Value="0">
+                                <Setter Property="Background" Value="Wheat" />
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Description}" Value="SumTotal">
+                                <Setter Property="Background" Value="LightGreen" />
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Current positions" >
+                        <GridViewColumn Header="Description" Width="240" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding Path=Description}"/>
+                                        <CheckBox x:Name="chk" Grid.Column="1" Cursor="Hand" Width="30" IsThreeState="False" IsChecked="{Binding Path=Checkboxtesting,Mode=TwoWay}" Command="{Binding Path=DataContext.BuyCommand ,RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" >
+                                            <CheckBox.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource ObjectBindingConverter}">
+                                                    <Binding Path="Description" />
+                                                    <Binding Path="IsChecked" ElementName="chk"/>
+                                                </MultiBinding>
+                                            </CheckBox.CommandParameter>
+                                        </CheckBox>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Required Fee" DisplayMemberBinding="{Binding Path=RequiredFee}" Width="90"/>
+                        <GridViewColumn Header="Less Given" DisplayMemberBinding="{Binding Path=RebateGiven}" Width="90" />
+                        <GridViewColumn Header="Amount Paid" DisplayMemberBinding="{Binding Path=Paid}" Width="90" />
+                        <GridViewColumn Header="Last Paid Date" DisplayMemberBinding="{Binding Path=LastPaymentDate}" Width="90" />
+                        <GridViewColumn Header="Balance" DisplayMemberBinding="{Binding Path=Balance}" Width="70" />
+                        <!--<GridViewColumn Header="Rebate" DisplayMemberBinding="{Binding Path=Section}" Width="Auto" />-->
+                        <GridViewColumn Header="Less" Width="70" >
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBox Width="60" x:Name="Rebate" VerticalAlignment="Center">
+                                        <TextBox.Style>
+                                            <Style TargetType="{x:Type TextBox}">
+                                                <Setter Property="Text" Value="{Binding Rebate, Mode=TwoWay, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" />
+                                                <Setter Property="IsEnabled" Value="{Binding Path=Checkboxtesting}" />
+                                            </Style>
+                                        </TextBox.Style>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="LostFocus">
+                                                <i:InvokeCommandAction Command="{Binding Path=DataContext.RebateLostFocusCommand ,RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" >
+                                                    <i:InvokeCommandAction.CommandParameter>
+                                                        <MultiBinding Converter="{StaticResource ObjectBindingConverter}">
+                                                            <Binding Path="Description"/>
+                                                            <Binding ElementName="Rebate" Path="Text"/>
+                                                        </MultiBinding>
+                                                    </i:InvokeCommandAction.CommandParameter>
+                                                </i:InvokeCommandAction>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="To Pay" Width="60" >
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBox Width="60" x:Name="ToPay" VerticalAlignment="Center">
+                                        <TextBox.Style>
+                                            <Style TargetType="{x:Type TextBox}">
+                                                <Setter Property="Text" Value="{Binding ToPay, Mode=TwoWay, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" />
+                                                <Setter Property="IsEnabled" Value="{Binding Path=Checkboxtesting}" />
+                                            </Style>
+                                        </TextBox.Style>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="LostFocus">
+                                                <i:InvokeCommandAction Command="{Binding Path=DataContext.ToPayLostFocusCommand ,RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding ElementName=ToPay, Path=Text}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <!--<GridViewColumn Header="To Pay" DisplayMemberBinding="{Binding Path=Balance}" Width="Auto"/>-->
+                        <!--<GridViewColumn Header="Remark" Width="auto" >
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBox Width="60" x:Name="Remark" VerticalAlignment="Center">
+                                        <TextBox.Style>
+                                            <Style TargetType="{x:Type TextBox}">
+                                                <Setter Property="Text" Value="{Binding RebateRemark, Mode=TwoWay, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" />
+                                                <Setter Property="IsEnabled" Value="{Binding Path=Checkboxtesting}" />
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>-->
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+        <Grid Grid.Row="2">
+            <ListView BorderThickness=".1" Width="Auto" SelectionMode="Single" HorizontalContentAlignment="Left"
+                  ItemsSource="{Binding Path=PayMonthlyFeeDetails}" AlternationCount="2" HorizontalAlignment="Left"
+                  IsSynchronizedWithCurrentItem="True" AutomationProperties.AutomationId="PositionSummaryGrid" VerticalAlignment="Top">
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Description}"
+                      Value="Admission">
+                                <Setter Property="Background"
+                  Value="Red" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.Resources>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Height" Value="22" />
+                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="BorderThickness" Value="0,.2,0,.2" />
+                        <Setter Property="BorderBrush" Value="Black" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding MonthlyBalance}" Value="0">
+                                <Setter Property="Background" Value="Wheat" />
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Current positions" >
+                        <GridViewColumn Header="Description" Width="240" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <!--<CheckBox x:Name="chk" Grid.Column="1" IsThreeState="False" IsChecked="{Binding Path=Checkboxtesting,Mode=TwoWay,UpdateSourceTrigger=Explicit}" Width="30" />-->
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding Path=MonthName}"/>
+                                        <CheckBox x:Name="MonthlyCkh" HorizontalAlignment="Right"  Grid.Column="1" Cursor="Hand" Width="30" IsThreeState="False" IsChecked="{Binding Path=MonthlyCheckBox,Mode=TwoWay}" Command="{Binding Path=DataContext.AddMonthlyPayFeeCommand ,RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" >
+                                            <CheckBox.CommandParameter>
+                                                <MultiBinding Converter="{StaticResource ObjectBindingConverter}">
+                                                    <Binding Path="MonthName" />
+                                                    <Binding Path="IsChecked" ElementName="MonthlyCkh"/>
+                                                </MultiBinding>
+                                            </CheckBox.CommandParameter>
+                                        </CheckBox>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Required Fee" DisplayMemberBinding="{Binding Path=RequiredMonthlyFee}" Width="90"/>
+                        <GridViewColumn Header="Less Given" DisplayMemberBinding="{Binding Path=MonthlyRebateGiven}" Width="90" />
+                        <GridViewColumn Header="Amount Paid" DisplayMemberBinding="{Binding Path=Monthlypaid}" Width="90" />
+                        <GridViewColumn Header="Last Paid Date" DisplayMemberBinding="{Binding Path=MontlyLastPaymentDate}" Width="90" />
+                        <GridViewColumn Header="Balance" DisplayMemberBinding="{Binding Path=MonthlyBalance}" Width="70" />
+                        <!--<GridViewColumn Header="Rebate" DisplayMemberBinding="{Binding Path=Section}" Width="Auto" />-->
+                        <GridViewColumn Header="Less" Width="70" >
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBox Width="60" x:Name="MonthlyRebate" VerticalAlignment="Center">
+                                        <TextBox.Style>
+                                            <Style TargetType="{x:Type TextBox}">
+                                                <Setter Property="Text" Value="{Binding MonthlyRebate, Mode=TwoWay, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" />
+                                                <Setter Property="IsEnabled" Value="{Binding Path=MonthlyCheckBox}" />
+                                            </Style>
+                                        </TextBox.Style>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="LostFocus">
+                                                <i:InvokeCommandAction Command="{Binding Path=DataContext.MonthlyRebateLostFocusCommand ,RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" >
+                                                    <i:InvokeCommandAction.CommandParameter>
+                                                        <MultiBinding Converter="{StaticResource ObjectBindingConverter}">
+                                                            <Binding Path="MonthName"/>
+                                                            <Binding ElementName="MonthlyRebate" Path="Text"/>
+                                                        </MultiBinding>
+                                                    </i:InvokeCommandAction.CommandParameter>
+                                                </i:InvokeCommandAction>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="To Pay" Width="60" >
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBox Width="60" x:Name="MonthlyToPay" VerticalAlignment="Center">
+                                        <TextBox.Style>
+                                            <Style TargetType="{x:Type TextBox}">
+                                                <Setter Property="Text" Value="{Binding MonthlyToPay, Mode=TwoWay, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" />
+                                                <Setter Property="IsEnabled" Value="{Binding Path=MonthlyCheckBox}" />
+                                            </Style>
+                                        </TextBox.Style>
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="LostFocus">
+                                                <i:InvokeCommandAction Command="{Binding Path=DataContext.MonthlyToPayLostFocusCommand ,RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" CommandParameter="{Binding ElementName=MonthlyToPay, Path=Text}" />
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <!--<GridViewColumn Header="To Pay" DisplayMemberBinding="{Binding Path=Balance}" Width="Auto"/>-->
+                        <!--<GridViewColumn Header="Remark" Width="auto">
+                            <GridViewColumn.CellTemplate >
+                                <DataTemplate>
+                                    <TextBox Width="60" x:Name="Remark" VerticalAlignment="Center">
+                                        <TextBox.Style>
+                                            <Style TargetType="{x:Type TextBox}">
+                                                <Setter Property="Text" Value="{Binding RebateRemark, Mode=TwoWay, ValidatesOnDataErrors=True,UpdateSourceTrigger=PropertyChanged}" />
+                                                <Setter Property="IsEnabled" Value="{Binding Path=Checkboxtesting}" />
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>-->
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Grid.Row="3" Background="LightGreen" HorizontalAlignment="Left">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="165"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Total Fee:" Width="50"/>
+            <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=PayMonthlyFeeModelObject.YearlyMonthlyRequiredTotal}" Width="50" />
+            <TextBlock Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Total Less:" Width="60"/>
+            <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=PayMonthlyFeeModelObject.YearlyMonthlyRebateTotal}" Width="50"/>
+            <TextBlock Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Total Amount To Pay:" Width="115"/>
+            <TextBlock Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=PayMonthlyFeeModelObject.YearlyMonthlyToPayTotal}" Width="50"/>
+            <TextBlock Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Balance" Width="105"/>
+            <TextBlock Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=PayMonthlyFeeModelObject.YearlyMonthlyBalance}" Width="50"/>
+            <TextBlock Grid.Column="8" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Fee Slip Generated:" Width="105"/>
+            <TextBlock Grid.Column="9" VerticalAlignment="Center" HorizontalAlignment="Left" Text="{Binding Path=PayMonthlyFeeModelObject.FeeSlipNo}" Width="50"/>
+        </Grid>
+        <!--<StackPanel Grid.Row="3">
+            <Rectangle
+                Name="MyRectangle"
+                Width="100" 
+                Height="100"
+                Fill="Blue">
+                <Rectangle.Triggers>
+                    -->
+        <!-- Animates the rectangle's opacity. -->
+        <!--
+                    <EventTrigger RoutedEvent="Rectangle.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetName="MyRectangle" 
+                                    Storyboard.TargetProperty="Opacity"
+                                    From="1.0" To="0.0" Duration="0:0:1" 
+                                    AutoReverse="True" RepeatBehavior="Forever" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Rectangle.Triggers>
+            </Rectangle>
+            
+        </StackPanel>-->
+    </Grid>
+</UserControl>

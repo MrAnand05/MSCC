@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="ViewSwitchingNavigation.Configuration.Views.ClassFeeConfigurationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:ViewSwitchingNavigation.Configuration.Views"
+             xmlns:vm="clr-namespace:ViewSwitchingNavigation.Configuration.ViewModels"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:ClassFeeConfigurationViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="530"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Class Fee Configuration" FontSize="20" FontWeight="Bold" Margin="10,10,0,0"/>
+        <Button Grid.Row="1" Grid.Column="0" Content="Save" Command="{Binding SaveCommand}" Margin="5,5,5,5" IsEnabled="{Binding ClassFeeConfigurationTopObj.IsEnableSaveButton}"/>
+        <Button Grid.Row="1" Grid.Column="1" Content="Edit" Command="{Binding EditCommand}" Margin="5,5,5,5" IsEnabled="{Binding ClassFeeConfigurationTopObj.IsEnableEditButton}"/>
+        <Button Grid.Row="1" Grid.Column="2" Content="Print" Command="{Binding PrintCommand}" Margin="5,5,5,5" Click="Button_Click" />
+        <!--<Button Grid.Row="0" Grid.Column="2" Command="{Binding TableViewCommands.ShowPrintPreviewDialog, ElementName=ConfigurationList}"/>-->
+        <DataGrid x:Name="ClassFeeConfigurationList" Grid.Row="2" Grid.ColumnSpan="4" SelectionMode="Single" CanUserSortColumns="False"
+                  CanUserAddRows="False" ItemsSource="{Binding Path=ClassFeeConfiguration}" IsReadOnly="{Binding Path=ClassFeeConfigurationTopObj.IsReadOnly}"  AutoGenerateColumns="False" Margin="8,0,8,16">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Class" Binding="{Binding Path=StudentClass, Mode=TwoWay}" IsReadOnly="True" Width="80" />
+                <DataGridTextColumn Header="Admin Fee" Binding="{Binding Path=AdmissionFee, Mode=TwoWay}" Width="92" />
+                <DataGridTextColumn Header="Annual Fee" Binding="{Binding Path=AnnualFee, Mode=TwoWay}" Width="92" />
+                <DataGridTextColumn Header="Form Fee" Binding="{Binding Path=FormFee, Mode=TwoWay}" Width="92" />
+                <DataGridTextColumn Header="ID Card Fee" Binding="{Binding Path=IDCardFee, Mode=TwoWay}" Width="92" />
+                <DataGridTextColumn Header="BoardRegistration Fee" Binding="{Binding Path=BoardRegistrationFee,Mode=TwoWay}" Width="92" />
+                <DataGridTextColumn Header="Monthly Fee" Binding="{Binding Path=MonthlyFee, Mode=TwoWay}" Width="92" />
+                <DataGridTextColumn Header="Computer Fee" Binding="{Binding Path=ComputerFee,Mode=TwoWay}" Width="92" />
+                <DataGridTextColumn Header="Tie/Belt Charges" Binding="{Binding Path=TieBeltCharges,Mode=TwoWay}" Width="92" />
+                <!--<DataGridTextColumn Header="Other Charges" Binding="{Binding Path=OtherCharges,Mode=TwoWay}" Width="95" />-->
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
