@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="ViewSwitchingNavigation.Reports.Views.ReportsNavigationItemView"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" 
+    xmlns:controls="clr-namespace:ViewSwitchingNavigation.Controls;assembly=ViewSwitchingNavigation.Controls" 
+    d:DesignHeight="300" d:DesignWidth="400">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MSCC;component/Resources/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <RadioButton x:Name="NavigateToReportRadioButton" GroupName="MainNavigation" Click="NavigateToReportRadioButton_Click" Style="{StaticResource MainViewRadioButtonStyle}" AutomationProperties.AutomationId="ReportRadioButton">Reports</RadioButton>
+    </Grid>
+</UserControl>

@@ -1,0 +1,187 @@
+﻿<UserControl x:Class="ViewSwitchingNavigation.Email.Views.PromoteExcludeView"
+             x:Name="userControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:infrastructure="clr-namespace:ViewSwitchingNavigation.Infrastructure;assembly=ViewSwitchingNavigation.Infrastructure" 
+    xmlns:infConverters="clr-namespace:ViewSwitchingNavigation.Infrastructure.Converters;assembly=ViewSwitchingNavigation.Infrastructure"
+    xmlns:controls="clr-namespace:ViewSwitchingNavigation.Controls;assembly=ViewSwitchingNavigation.Controls" 
+    xmlns:prism="http://www.codeplex.com/prism"
+    xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    mc:Ignorable="d" 
+    xmlns:vm="clr-namespace:ViewSwitchingNavigation.Email.ViewModels"
+    xmlns:c="clr-namespace:ViewSwitchingNavigation.Email.ViewModels"
+    xmlns:views="clr-namespace:ViewSwitchingNavigation.Email.Views">
+    <UserControl.DataContext>
+        <vm:PromoteExcludeViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <infrastructure:BindingProxy x:Key="proxy" Data="{Binding}" />
+        <infConverters:boolNotConverter x:Key="BoolNotConverter" />
+        <infConverters:ObjectBindingConverter x:Key="ObjectBindingConverter" />
+        <Style TargetType="{x:Type TextBlock}" x:Key="GridBlockStyle">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Visibility" Value="Visible"/>
+        </Style>
+
+        <Style TargetType="{x:Type FrameworkElement}" x:Key="GridEditStyle">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Visibility" Value="Hidden"/>
+        </Style>
+    </UserControl.Resources>
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding SearchStudentRequest, Mode=OneWay}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowContent>
+                    <views:SearchStudentView/>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="520"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+        </Grid.Background>
+        <StackPanel Grid.Row="0">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </Grid.Background>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Select Class" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ComboBox Name="ChkClass" Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Center" SelectedItem="{Binding PromoteExcludeTop.SelectedClass}" ItemsSource="{Binding Path=Classes1}" SelectedIndex="0"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Select Section" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ComboBox Name="ChkSection" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" SelectedItem="{Binding PromoteExcludeTop.SelectedSection}" ItemsSource="{Binding Path=SectionList}" SelectedIndex="0"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="AdmiNo:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox Name="AdminNo" Grid.Row="0" Grid.Column="5"  Text="{Binding PromoteExcludeTop.AdminNo, Mode=OneWayToSource}"  HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                <Button Grid.Row="1" Grid.Column="0" Content="Search" Command="{Binding SearchStudentCommand}" Padding="0,5,5,5" Margin="5,5,5,5">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource ObjectBindingConverter}">
+                            <Binding ElementName="ChkClass" Path="SelectedItem" />
+                            <Binding ElementName="ChkSection" Path="SelectedItem" />
+                            <Binding ElementName="AdminNo" Path="Text" />
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+                <Button Grid.Row="1" Grid.Column="1" Content="Promote" IsEnabled="{Binding PromoteExcludeTop.PromoteExclusion }" Command="{Binding Path= PromoteStudentsCommand}" CommandParameter="P" Padding="0,5,5,5" Margin="5,5,5,5">
+                    <!--<Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource ObjectBindingConverter}">
+                            <Binding Path="SearchedStudents" />
+                        </MultiBinding>
+                    </Button.CommandParameter>-->
+                </Button>
+                <Button Grid.Row="1" Grid.Column="2" Content="Failed" IsEnabled="{Binding PromoteExcludeTop.FailLS }" Command="{Binding Path= PromoteStudentsCommand}" CommandParameter="F" Padding="0,5,5,5" Margin="5,5,5,5"/>
+                <Button Grid.Row="1" Grid.Column="3" Content="Leaving School" IsEnabled="{Binding PromoteExcludeTop.FailLS }" Command="{Binding Path= PromoteStudentsCommand}" CommandParameter="LS" Padding="0,5,5,5" Margin="5,5,5,5"/>
+                <Button Grid.Row="1" Grid.Column="4" Content="12th Passout" IsEnabled="{Binding PromoteExcludeTop.PO12 }" Command="{Binding Path= PromoteStudentsCommand}" CommandParameter="12PO" Padding="0,5,5,5" Margin="5,5,5,5"/>
+            </Grid>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <ListView BorderThickness="1" Width="Auto" SelectionMode="Single" HorizontalContentAlignment="Left" HorizontalAlignment="Left"
+                  ItemsSource="{Binding Path=SearchedStudents}" AlternationCount="2" SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
+                  IsSynchronizedWithCurrentItem="True" AutomationProperties.AutomationId="PositionSummaryGrid" VerticalAlignment="Top">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="BorderThickness" Value="1,1,1,1" />
+                        <Setter Property="BorderBrush" Value="Black" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView AllowsColumnReorder="true" ColumnHeaderToolTip="Current positions" >
+                        <GridViewColumn Header="S.No" Width="40" DisplayMemberBinding="{Binding Path=SNo}"/>
+                        <GridViewColumn Width="100">
+                            <GridViewColumn.Header>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="15"/>
+                                        <ColumnDefinition Width="35"/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox Grid.Column="0" x:Name="chk_SelectAll" Cursor="Hand" IsThreeState="False" IsChecked="{Binding Path=PromoteExcludeTop.SelectAll,Mode=TwoWay}"  Command="{Binding Path=DataContext.chkSelectAllCommand,RelativeSource={RelativeSource Self}}">
+                                        <CheckBox.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource ObjectBindingConverter}">
+                                                <Binding Path="IsChecked" RelativeSource="{RelativeSource self}"/>
+                                            </MultiBinding>
+                                        </CheckBox.CommandParameter>
+                                    </CheckBox>
+                                    <TextBlock Grid.Column="1" Text="Select"/>
+                                </Grid>
+                            </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox x:Name="chk_Student" Cursor="Hand" IsThreeState="False" IsChecked="{Binding Path=Chk_Student,Mode=TwoWay}" Command="{Binding Path=DataContext.ckhCheckedCommand,RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" >
+                                        <CheckBox.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource ObjectBindingConverter}">
+                                                <Binding Path="AdminNo" />
+                                                <Binding Path="IsChecked" ElementName="chk_Student"/>
+                                            </MultiBinding>
+                                        </CheckBox.CommandParameter>
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <!--<GridViewColumn Header="Select" Width="50">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox x:Name="chk_Student" Cursor="Hand" IsThreeState="False" IsChecked="{Binding Path=Chk_Student,Mode=TwoWay}" Command="{Binding Path=DataContext.ckhCheckedCommand,RelativeSource={RelativeSource AncestorType={x:Type ListView}}}" >
+                                        <CheckBox.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource ObjectBindingConverter}">
+                                                <Binding Path="AdminNo" />
+                                                <Binding Path="IsChecked" ElementName="chk_Student"/>
+                                            </MultiBinding>
+                                        </CheckBox.CommandParameter>
+                                    </CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>-->
+                        <GridViewColumn Header="Admin No" DisplayMemberBinding="{Binding Path=AdminNo}" Width="90" />
+                        <GridViewColumn Header="Student Name" DisplayMemberBinding="{Binding Path=StudentName}" Width="120" />
+                        <GridViewColumn Header="Father's Name" DisplayMemberBinding="{Binding Path=FName}" Width="90" />
+                        <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Path=Address}" Width="200" />
+                        <GridViewColumn Header="Class" DisplayMemberBinding="{Binding Path=CurrentClass}" Width="60" />
+                        <GridViewColumn Header="Section" DisplayMemberBinding="{Binding Path=Section}" Width="50" />
+                        <!--<GridViewColumn Header="Marks" Width="70" />
+                        <GridViewColumn Header="Fee Balance" Width="60">
+                        </GridViewColumn>-->
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+            </Grid.Background>
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Total Student" Width="120"/>
+            <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=PromoteExcludeTop.TotalStudents}" Width="120" />
+            <TextBlock Grid.Column="2" VerticalAlignment="Center" Text="Total Selected" Width="120"/>
+            <TextBlock Grid.Column="3" VerticalAlignment="Center" Text="{Binding Path=PromoteExcludeTop.TotalSelectedStudents}" Width="120"/>
+        </Grid>
+    </Grid>
+</UserControl>

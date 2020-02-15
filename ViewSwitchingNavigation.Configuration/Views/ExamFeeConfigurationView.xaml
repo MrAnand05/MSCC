@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="ViewSwitchingNavigation.Configuration.Views.ExamFeeConfigurationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:ViewSwitchingNavigation.Configuration.Views"
+             xmlns:vm="clr-namespace:ViewSwitchingNavigation.Configuration.ViewModels"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <vm:ExamFeeConfigurationViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="96"/>
+            <ColumnDefinition Width="61"/>
+            <ColumnDefinition Width="61"/>
+            <ColumnDefinition Width="61"/>
+            <ColumnDefinition Width="61"/>
+            <ColumnDefinition Width="61"/>
+            <ColumnDefinition Width="61"/>
+            <ColumnDefinition Width="61"/>
+            <ColumnDefinition Width="61"/>
+            <ColumnDefinition Width="61"/>
+            <ColumnDefinition Width="61"/>
+            <ColumnDefinition Width="61"/>
+            <ColumnDefinition Width="61"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Exam Fee Configuration" FontSize="20" FontWeight="Bold" Margin="10,10,0,0"/>
+        <Button Grid.Row="1" Grid.Column="0" Content="Save" Command="{Binding SaveCommand}" Margin="5,5,5,5" IsEnabled="{Binding ExamFeeConfigurationTopObj.IsEnableSaveButton}"/>
+        <Button Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="Edit" Command="{Binding EditCommand}" Margin="5,5,5,5" IsEnabled="{Binding ExamFeeConfigurationTopObj.IsEnableEditButton}"/>
+        <Button Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Content="Print" Command="{Binding PrintCommand}" Margin="5,5,5,5" Click="Button_Click" />
+        <DataGrid x:Name="ExamFeeConfigurationList" Grid.Row="2" Grid.ColumnSpan="13" SelectionMode="Single" CanUserSortColumns="False"
+                  CanUserAddRows="False" ItemsSource="{Binding Path=ExamFeeConfiguration}" IsReadOnly="{Binding Path=ExamFeeConfigurationTopObj.IsReadOnly}"  AutoGenerateColumns="False" Margin="8,0,8,16">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Class" Binding="{Binding Path=StudentClass, Mode=TwoWay}" IsReadOnly="True" Width="90" />
+                <DataGridTextColumn Header="Apr" Binding="{Binding Path=Apr, Mode=TwoWay}" Width="60" />
+                <DataGridTextColumn Header="May" Binding="{Binding Path=May, Mode=TwoWay}" Width="60" />
+                <DataGridTextColumn Header="Jun" Binding="{Binding Path=Jun, Mode=TwoWay}" Width="60" />
+                <DataGridTextColumn Header="Jul" Binding="{Binding Path=Jul, Mode=TwoWay}" Width="60" />
+                <DataGridTextColumn Header="Aug" Binding="{Binding Path=Aug, Mode=TwoWay}" Width="60" />
+                <DataGridTextColumn Header="Sep" Binding="{Binding Path=Sep,Mode=TwoWay}" Width="60" />
+                <DataGridTextColumn Header="Oct" Binding="{Binding Path=Oct,Mode=TwoWay}" Width="60" />
+                <DataGridTextColumn Header="Nov" Binding="{Binding Path=Nov,Mode=TwoWay}" Width="60" />
+                <DataGridTextColumn Header="Dec" Binding="{Binding Path=Dec,Mode=TwoWay}" Width="60" />
+                <DataGridTextColumn Header="Jan" Binding="{Binding Path=Jan,Mode=TwoWay}" Width="60" />
+                <DataGridTextColumn Header="Feb" Binding="{Binding Path=Feb,Mode=TwoWay}" Width="60" />
+                <DataGridTextColumn Header="Mar" Binding="{Binding Path=Mar,Mode=TwoWay}" Width="60" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,72 @@
+﻿<UserControl 
+    x:Class="ViewSwitchingNavigation.Email.Views.StudentView"
+    x:Name="userControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:infrastructure="clr-namespace:ViewSwitchingNavigation.Infrastructure;assembly=ViewSwitchingNavigation.Infrastructure" 
+    xmlns:infConverters="clr-namespace:ViewSwitchingNavigation.Infrastructure.Converters;assembly=ViewSwitchingNavigation.Infrastructure"
+    xmlns:controls="clr-namespace:ViewSwitchingNavigation.Controls;assembly=ViewSwitchingNavigation.Controls" 
+    xmlns:prism="http://www.codeplex.com/prism"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    mc:Ignorable="d" 
+    xmlns:c="clr-namespace:ViewSwitchingNavigation.Email.ViewModels"
+    xmlns:views="clr-namespace:ViewSwitchingNavigation.Email.Views">
+    <!--<UserControl.DataContext>
+        <vm:StudentViewModel />
+    </UserControl.DataContext>-->
+    
+    <Grid x:Name="LayoutRoot"  >
+        <Grid.Resources>
+            <c:StudentViewModel x:Key="myDataSource"/>
+        </Grid.Resources>
+        <Grid.DataContext>
+            <Binding Source="{StaticResource myDataSource}"/>
+        </Grid.DataContext>
+        <TabControl 
+            AutomationProperties.AutomationId="EmployeeSummaryTabControl"
+            
+            Width="Auto"
+            Height="Auto">
+            <TabItem Header="Register New Student">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:RegisterStudentView/>
+            </TabItem>
+            <TabItem Header="Fee Details">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:PayFeeView/>
+            </TabItem>
+            <TabItem Header="Promote Student">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:PromoteExcludeView/>
+            </TabItem>
+            <TabItem Header="Edit/Reprint FeeSlip">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:EditReprintFeeSlip/>
+            </TabItem>
+            <TabItem Header="Edit Promotion/Exclusion">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:EditPromoteExcludeView/>
+            </TabItem>
+            <TabItem Header="DB BackUp">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:DBBackUp/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
+    
+    

@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="ViewSwitchingNavigation.Configuration.Views.ConfigurationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:views="clr-namespace:ViewSwitchingNavigation.Configuration.Views"
+             mc:Ignorable="d" 
+             >
+    <Grid>
+        <TabControl 
+            AutomationProperties.AutomationId="ConfigurationTabControl"
+            Width="auto"
+            Height="Auto">
+            <TabControl.Background>
+                <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+            </TabControl.Background>
+            <TabItem Header="Class Fee Configuration">
+                <views:ClassFeeConfigurationView/>
+            </TabItem>
+            <TabItem Header="ExamFee Configuration">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                 <views:ExamFeeConfigurationView/>
+            </TabItem>
+            <TabItem Header="Transport Configuration">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:TransFeeConfigurationView/>
+            </TabItem>
+            <TabItem Header="Income Expense Source">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:InExpConfigurationView/>
+            </TabItem>
+            <TabItem Header="Subjects">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:SubjectView/>
+            </TabItem>
+            <TabItem Header="Class Subjects">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:ClassSubConfigurationView/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

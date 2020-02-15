@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="ViewSwitchingNavigation.Reports.Views.ReportsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:views="clr-namespace:ViewSwitchingNavigation.Reports.Views"
+             mc:Ignorable="d" 
+             >
+    <Grid>
+        <TabControl 
+            AutomationProperties.AutomationId="ConfigurationTabControl"
+            Width="auto"
+            Height="Auto">
+            <TabControl.Background>
+                <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+            </TabControl.Background>
+            <TabItem Header="Transaction Report">
+                <views:TransactionsReportR/>
+            </TabItem>
+            <TabItem Header="Dues Report">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:FeeBalance/>
+            </TabItem>
+            <TabItem Header="Generate Notice">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:NoticeGeneration/>
+            </TabItem>
+            <TabItem Header="Students Report">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:StudentsDetialReport/>
+            </TabItem>
+            <TabItem Header="Fee BackUp">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:FeeBackUp/>
+            </TabItem>
+            <TabItem Header="All PaySlip">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:AllFeeSlipIndividual/>
+            </TabItem>
+            <TabItem Header="All Bro/Sis Less">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:AllStuSiblingConcession/>
+            </TabItem>
+            <TabItem Header="Transport Detail">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:AllStuTransDetail/>
+            </TabItem>
+            <TabItem Header="AdmitCard">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:PrintAdmitCard/>
+            </TabItem>
+            <TabItem Header="ID Card">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:IDCard/>
+            </TabItem>
+            <TabItem Header="TC">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:TC/>
+            </TabItem>
+            <TabItem Header="Character/Birth Certificate">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:CBCertificate/>
+            </TabItem>
+            <TabItem Header="Student Left School">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:StudentLeftSchool/>
+            </TabItem>
+            <TabItem Header="SelectStudent">
+                <TabItem.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/MSCC;component/Resources/background.png"  Stretch="UniformToFill"/>
+                </TabItem.Background>
+                <views:SelectIDCards/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>
+    
